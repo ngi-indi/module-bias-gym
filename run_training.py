@@ -22,14 +22,16 @@ for model in models:
         results[model][task] = trainer.run()
 
     df_results = pd.DataFrame(results).T  # il dataframe viene trasposto per avere i modelli nelle righe
+    df_results['Model'] = df_results.index  # colonna con i nomi dei modelli
 
 for model in models:
     model_instance, _, _ = modelspecifications(model)
     df_results.loc[model, 'Size (MB)'] = calculate_model_size(model_instance, model)
-cols = ['Size (MB)'] + tasks
-df_results = df_results[cols]
 
-df_results.to_csv('training_results.csv', index = True)
+cols = ['Model', 'Size (MB)'] + tasks  
+df_results = df_results[cols]  #riordinamento delle colonne
+
+df_results.to_csv('training_results.csv', index=False)  # Salvataggio del dataframe ottenuto 
 
 print("Dataframe salvato in training_results.csv")
 print(df_results)

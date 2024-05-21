@@ -44,11 +44,13 @@ class Trainer:
     def load_data(self):
         data_path = os.getcwd() + "/training_datasets/" + self.task + ".csv"
         df = pd.read_csv(data_path)
+        df = df.dropna()
+        df = df.reset_index(drop=True)
         return df
 
     #tokenizzazione dei dati del dataset
     def tokenize_data(self, df, tokenizer):
-        
+
         tokenized = []
         print("Tokenizing...")
 
