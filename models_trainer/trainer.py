@@ -1,7 +1,6 @@
 import copy
 import os
 import random
-
 import numpy as np
 import pandas as pd
 import torch
@@ -11,7 +10,6 @@ from torch.utils.data import DataLoader, SubsetRandomSampler
 from tqdm import trange
 from tqdm.auto import tqdm
 from transformers import get_scheduler
-
 from models import modelspecifications
 
 
@@ -29,7 +27,7 @@ class Trainer:
         self.max_epoch = max_epoch
         self.device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu") #assegnazione del dispositivo di esecuzione all'attributo 'device' dell'istanza
 
-        #imposta il seed per la generazione di numeri casuali nelle librerie utilizzate per la riproducibilità dei risultati durante l'addestramento
+    #seed per la generazione di numeri casuali nelle librerie utilizzate per la riproducibilità dei risultati durante l'addestramento
     def set_random_seed(self):
         random.seed(self.seed)
         np.random.seed(self.seed)
@@ -44,7 +42,8 @@ class Trainer:
     def load_data(self):
         data_path = os.getcwd() + "/training_datasets/" + self.task + ".csv"
         df = pd.read_csv(data_path)
-        df = df.dropna()
+        df = df.dropna()  #rimzione degli attributi Nan
+        df = df[df['label'].isin([0, 1])]  # Filtraggio delle righe con etichette 0 e 1
         df = df.reset_index(drop=True)
         return df
 
@@ -64,9 +63,7 @@ class Trainer:
                 tok['token_type_ids'] = torch.tensor(tok['token_type_ids'])
             tokenized.append(tok)
         return tokenized
-
-
-    
+   
 
     def evaluate(self,model,dl):
         num_steps = len(dl) #numero di batch presenti nel dataloader
@@ -96,7 +93,7 @@ class Trainer:
 
         loss = loss/num_steps  #calcolo della loss media
         predictions = torch.stack(predictions).cpu() #conversione delle previsioni del modello in un tensore pytorch
-        report = classification_report(truth, predictions, target_names=['non-biased', 'biased'],
+        report = classification_report(truth, predictions, labels = [0, 1], target_names=['non-biased', 'biased'],
                                                output_dict=True) #calcola il report delle metriche di classificazione tra le etichette di verità e le predizioni del modello
         return loss, report
     
@@ -107,6 +104,7 @@ class Trainer:
         trigger = 0 #contatore di epoche senza addestramenti
 
         for epoch in trange(self.max_epoch, desc='Epoch'): #trange serve per ottenere una barra di avanzamento con un'indicazione del progresso
+
             progress_bar = tqdm(range(len(train_dl)))
 
             model.train()
@@ -137,6 +135,16 @@ class Trainer:
 
         return model
 
+    #salvataggio del modello migliore ottenuto 
+    def save_model(self, model, model_name, task_name):
+        model_save_path = os.path.join('Models')
+        if not os.path.exists(model_save_path):
+            os.makedirs(model_save_path)
+        model_filename = f"{model_name}_best_{task_name}.pt"
+        torch.save(model.state_dict(), os.path.join(model_save_path, model_filename))
+        print(f"Modello migliore {model_name} per il task {task_name} salvato in {model_filename}")
+
+
     def run(self):
         #estrazione del modello, tokenizer e learning rate
         model, tokenizer, lr = modelspecifications(name=self.model_name, model_length=self.max_length)
@@ -146,6 +154,9 @@ class Trainer:
         tokenized_df = self.tokenize_data(df,tokenizer)
         skfold = StratifiedKFold(n_splits=self.number_of_folds, shuffle=True, random_state=self.seed)
         scores = []
+
+        best_model = None
+        best_score = float('-inf')
 
         #divide il dataset in base alla colonna 'dataset_id', in quanto il dataset completo comprende più dataset
         for train_idx, dev_idx in skfold.split(np.arange(len(df)),df['dataset_id'].to_list()):
@@ -183,4 +194,12 @@ class Trainer:
             #valutazione del modello, da cui vengono estratte le metriche di interesse
             eval_loss, report = self.evaluate(trained_model,test_dl)
             scores.append(report['macro avg']['f1-score'])
-        return sum(scores)/self.number_of_folds
+
+            if report['macro avg']['f1-score'] > best_score:
+                best_score = report['macro avg']['f1-score']
+                best_model = trained_model
+
+        if best_model is not None:
+            self.save_model(best_model, self.model_name, self.task)
+            
+        return sum(scores) / self.number_of_folds
