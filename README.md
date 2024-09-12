@@ -1,4 +1,4 @@
-This folder contains code for train and evaluate some transformers language models on multiple bias types. 
+This repository contains code for train and evaluate some transformers language models on multiple bias types. 
 ## Contents
 ### trainer.py 
 This script contains the Trainer class which allows the training, evaluation, and saving of language models. 
@@ -20,8 +20,8 @@ It handles:
 this script contains the initialization of the models and their tokenizers.
 
 ## Usage 
-Download the pre-trained model weights from [https://drive.google.com/drive/folders/1aOTVMTdLcDhOHuj-bcJbO5SPM7Zdh-_O?usp=drive_link](this Google Drive directory) and place them in a directory named 'training_models' within the same directory as the scripts.
-Download the training datasets from [https://drive.google.com/drive/folders/1VSXZcAmDQj7Gk1_AEA1HI_dVVUF-sFmW?usp=drive_link](this Google Drive directory) and place them in a directory named 'training_datasets' within the same directory as the scripts.
+Download the pre-trained model weights from [this Google Drive directory](https://drive.google.com/drive/folders/1aOTVMTdLcDhOHuj-bcJbO5SPM7Zdh-_O?usp=drive_link) and place them in a directory named 'training_models' within the same directory as the scripts.
+Download the training datasets from [this Google Drive directory](https://drive.google.com/drive/folders/1VSXZcAmDQj7Gk1_AEA1HI_dVVUF-sFmW?usp=drive_link) and place them in a directory named 'training_datasets' within the same directory as the scripts.
 
 To start the training process execute 'run_training.py'. After training, performance metrics will be store in the 'training_results.csv' file. 
 
