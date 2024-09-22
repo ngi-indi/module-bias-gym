@@ -97,7 +97,6 @@ Install the required Python packages by running:
    - **--batch_size**: Batch size for training (default: `32`)
    - **--max_length**: Maximum sequence length for tokenization (default: `128`)
    - **--epochs**: Number of epochs for training (default: `10`)
-   - **--eval**: Flag to evaluate the model without training
 
    
 3. **Results**: After training, results and metrics will be saved in the `results/` directory, where you can find detailed reports about model performance in the generated CSV files.
