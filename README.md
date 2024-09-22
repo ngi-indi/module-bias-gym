@@ -144,5 +144,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Contact
 For any questions or support, please reach out to:
-- Email: bart@unica.it, diego.reforgiato@unica.it, ludovico.boratto@unica.it, mirko.marras@unica.it, giuseppe.scarpi@r2msolution.com
+- University of Cagliari: bart@unica.it, diego.reforgiato@unica.it, ludovico.boratto@unica.it, mirko.marras@unica.it
+- R2M Solution: giuseppe.scarpi@r2msolution.com
 - Website: Coming soon!
