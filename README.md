@@ -92,7 +92,7 @@ Install the required Python packages by running:
     
    Parameters list:
    - **--models**: List of models to be trained (default: `['robertatwitter', 'electra', ..., 't5']`)
-   - **--tasks**: List of tasks for bias detection (default: `['cognitive-bias', 'fake-news', 'gender-bias', ..., 'text-level-bias']`)
+   - **--tasks**: List of tasks for bias detection (default: `['cognitive-bias', ..., 'gender-bias']`)
    - **--number_of_folds**: Number of folds for cross-validation (default: `5`)
    - **--batch_size**: Batch size for training (default: `32`)
    - **--max_length**: Maximum sequence length for tokenization (default: `128`)
