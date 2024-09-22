@@ -87,12 +87,12 @@ Install the required Python packages by running:
     python train.py --models roberta --tasks gender-bias --epochs 10
     
     # Example: Training multiple models on multiple tasks
-    python train.py --models roberta electra bart --tasks gender-bias hate-speech political-bias --epochs 10
+    python train.py --models roberta electra --tasks gender-bias hate-speech
    ```
     
    Parameters list:
-   - **--models**: List of models to be trained (default: `['robertatwitter', 'electra', 'bart', 'convbert', 'gpt2', 'roberta', 't5']`)
-   - **--tasks**: List of tasks for bias detection (default: `['cognitive-bias', 'fake-news', 'gender-bias', 'hate-speech', 'linguistic-bias', 'political-bias', 'racial-bias', 'text-level-bias']`)
+   - **--models**: List of models to be trained (default: `['robertatwitter', 'electra', ..., 't5']`)
+   - **--tasks**: List of tasks for bias detection (default: `['cognitive-bias', 'fake-news', 'gender-bias', ..., 'text-level-bias']`)
    - **--number_of_folds**: Number of folds for cross-validation (default: `5`)
    - **--batch_size**: Batch size for training (default: `32`)
    - **--max_length**: Maximum sequence length for tokenization (default: `128`)
@@ -100,7 +100,7 @@ Install the required Python packages by running:
    - **--eval**: Flag to evaluate the model without training
 
    
-3. **Results**: After training, results and metrics will be saved in the `results/` directory. You can find detailed reports about model performance in the generated CSV files.
+3. **Results**: After training, results and metrics will be saved in the `results/` directory, where you can find detailed reports about model performance in the generated CSV files.
 
 ### Evaluating and testing
 
