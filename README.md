@@ -20,8 +20,8 @@
   - [Prerequisites](#prerequisites)
   - [Setup](#setup)
 - [Usage](#usage)
-  - [Training a model](#training-a-model)
-  - [Evaluating and testing](#evaluating-and-testing)
+  - [Training ](#training)
+  - [Evaluating](#evaluating)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -76,7 +76,7 @@ Install the required Python packages by running:
 
 ## Usage
 
-### Training a model
+### Training
 
 1. **Prepare your data**: Ensure datasets are placed in the correct directory or modify the script to point to your data.
 
@@ -101,7 +101,7 @@ Install the required Python packages by running:
    
 3. **See the results**: After training, results and metrics will be saved in the `results/` directory, where you can find detailed reports about model performance in the generated CSV files.
 
-### Evaluating and testing
+### Evaluating
 
 If you want to evaluate an already trained model, use the `--eval` flag:
 
