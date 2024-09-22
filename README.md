@@ -74,8 +74,6 @@ Install the required Python packages by running:
 - Download the [pre-trained model weights](https://drive.google.com/drive/folders/1aOTVMTdLcDhOHuj-bcJbO5SPM7Zdh-_O?usp=drive_link) and place them in the appropriate directory: ```models/```.
 - Ensure you have all necessary models downloaded and placed in the relevant directory.
 
----
-
 ## Usage
 
 ### Training a model
