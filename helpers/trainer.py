@@ -38,7 +38,7 @@ class Trainer:
 
     def load_data(self):
         """Load and preprocess the dataset."""
-        data_path = os.path.join(os.getcwd(), "training_datasets", f"{self.task}.csv")
+        data_path = os.path.join(os.getcwd(), "datasets", f"{self.task}.csv")
         df = pd.read_csv(data_path).dropna()
         df = df[df['label'].isin([0, 1])].reset_index(drop=True)
         return df
@@ -46,7 +46,6 @@ class Trainer:
     def tokenize_data(self, df, tokenizer):
         """Tokenize the dataset using the specified tokenizer."""
         tokenized = []
-        print("Tokenizing data...")
         for i in tqdm(range(len(df))):
             tok = tokenizer(df.iloc[i]['text'], max_length=self.max_length, padding="max_length", truncation=True)
             tok = {key: torch.tensor(value) for key, value in tok.items()}
@@ -84,27 +83,36 @@ class Trainer:
         """Train the model with early stopping based on validation loss."""
         best_loss, patience, trigger = float('inf'), 1, 0
 
-        for epoch in trange(self.max_epoch, desc='Epoch'):
-            model.train()
-            progress_bar = tqdm(train_loader, desc=f"Training Epoch {epoch+1}", leave=False)
+        # Single progress bar for all epochs
+        with tqdm(total=len(train_loader) * self.max_epoch, desc='Training', ncols=100) as progress_bar:
+            for epoch in range(self.max_epoch):
+                model.train()
 
-            for batch in progress_bar:
-                batch = {key: value.to(self.device) for key, value in batch.items()}
-                optimizer.zero_grad()
-                outputs = model(**batch)
-                loss = outputs.loss
-                loss.backward()
-                optimizer.step()
-                lr_scheduler.step()
+                # Loop over batches
+                for batch in train_loader:
+                    batch = {key: value.to(self.device) for key, value in batch.items()}
+                    optimizer.zero_grad()
+                    outputs = model(**batch)
+                    loss = outputs.loss
+                    loss.backward()
+                    optimizer.step()
+                    lr_scheduler.step()
 
-            dev_loss, _ = self.evaluate(model, dev_loader)
-            if dev_loss >= best_loss:
-                trigger += 1
-                if trigger >= patience:
-                    print("Early stopping triggered.")
-                    break
-            else:
-                trigger, best_loss = 0, dev_loss
+                    # Update the progress bar with the current loss (overwrite in the same line)
+                    progress_bar.set_postfix({"Epoch": epoch + 1, "Training Loss": f"{loss.item():.4f}"})
+                    progress_bar.update(1)
+
+                # After each epoch, evaluate the model on the validation set
+                dev_loss, _ = self.evaluate(model, dev_loader)
+
+                # Early stopping logic based on validation loss
+                if dev_loss >= best_loss:
+                    trigger += 1
+                    if trigger >= patience:
+                        print(f"Early stopping triggered after {epoch + 1} epochs.")
+                        break
+                else:
+                    trigger, best_loss = 0, dev_loss
 
         return model
 

@@ -1,1 +1,21 @@
-__pycache__
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environment directory
+venv/
+
+# Ignore datasets directory
+datasets/
+
+# Ignore models directory
+models/
+
+# Ignore results directory
+results/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
