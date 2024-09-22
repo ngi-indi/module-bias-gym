@@ -34,7 +34,7 @@
 
 Before you begin, ensure you have the following installed on your system:
 
-- Python 3.8
+- Python 3.8 as a base programming environment.
 - PyTorch for handling the model training and inference.
 - Transformers for state-of-the-art NLP models.
 
@@ -87,13 +87,22 @@ Install the required Python packages by running:
 2. **Run the `train.py` script** to train a model on a specific task. You can specify the model and task you want to train on using the provided options:
 
    ```bash
-   python train.py --model roberta --task gender-bias --epochs 10
+   # Example: Training a single model on a single task
+    python train.py --models roberta --tasks gender-bias --epochs 10
+    
+    # Example: Training multiple models on multiple tasks
+    python train.py --models roberta electra bart --tasks gender-bias hate-speech political-bias --epochs 10
    ```
     
-   Example options:
-   - `--model`: Choose from models like `roberta`, `bart`, `gpt2`, etc.
-   - `--task`: Select the type of bias to detect (e.g., `gender-bias`, `hate-speech`).
-   - `--epochs`: Define the number of training epochs.
+   Parameters list:
+   - **--models**: List of models to be trained (default: `['robertatwitter', 'electra', 'bart', 'convbert', 'gpt2', 'roberta', 't5']`)
+   - **--tasks**: List of tasks for bias detection (default: `['cognitive-bias', 'fake-news', 'gender-bias', 'hate-speech', 'linguistic-bias', 'political-bias', 'racial-bias', 'text-level-bias']`)
+   - **--number_of_folds**: Number of folds for cross-validation (default: `5`)
+   - **--batch_size**: Batch size for training (default: `32`)
+   - **--max_length**: Maximum sequence length for tokenization (default: `128`)
+   - **--epochs**: Number of epochs for training (default: `10`)
+   - **--eval**: Flag to evaluate the model without training
+
    
 3. **Results**: After training, results and metrics will be saved in the `results/` directory. You can find detailed reports about model performance in the generated CSV files.
 
@@ -134,8 +143,8 @@ If you want to evaluate an already trained model, use the `--eval` flag:
    git push origin feature-branch
    ```
 7. **Open a pull request** from your fork’s branch to the main branch of this repository.
-- Describe the changes you’ve made in the PR description.
-- Ensure that your PR references any relevant issues.
+   - Describe the changes you’ve made in the PR description.
+   - Ensure that your PR references any relevant issues.
 
 ---
 
@@ -146,5 +155,5 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ## Contact
 For any questions or support, please reach out to:
-- Email: support@ngi-indi.com
-- Website: NGI Search INDI
+- Email: {bart, diego.reforgiato, ludovico.boratto, mirko.marras}@unica.it, giuseppe.scarpi@r2msolution.com
+- Website: Coming soon!
