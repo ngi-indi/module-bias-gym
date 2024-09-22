@@ -34,10 +34,9 @@
 
 Before you begin, ensure you have the following installed on your system:
 
-- **Python 3.8+**
-- **PyTorch**: For handling the model training and inference.
-- **Transformers**: Huggingface's library for state-of-the-art NLP models.
-- **Additional libraries** listed in the `requirements.txt` file.
+- Python 3.8
+- PyTorch for handling the model training and inference.
+- Transformers for state-of-the-art NLP models.
 
 ### Setup
 
@@ -72,6 +71,13 @@ Install the required Python packages by running:
 - Download the [pre-processed datasets](https://drive.google.com/drive/folders/1VSXZcAmDQj7Gk1_AEA1HI_dVVUF-sFmW?usp=drive_link) and place them in the appropriate directory: ```datasets/```.
 - Ensure you have all necessary datasets downloaded and placed in the relevant directory.
 
+
+#### 5. Download pre-trained models (optional):
+- Download the [pre-trained model weights](https://drive.google.com/drive/folders/1aOTVMTdLcDhOHuj-bcJbO5SPM7Zdh-_O?usp=drive_link) and place them in the appropriate directory: ```models/```.
+- Ensure you have all necessary models downloaded and placed in the relevant directory.
+
+---
+
 ## Usage
 
 ### Training a model
@@ -98,6 +104,8 @@ If you want to evaluate an already trained model, use the `--eval` flag:
    ```bash
    python train.py --model roberta --task gender-bias --eval
    ```
+
+---
 
 ## Contributing
 
@@ -129,8 +137,12 @@ If you want to evaluate an already trained model, use the `--eval` flag:
 - Describe the changes you’ve made in the PR description.
 - Ensure that your PR references any relevant issues.
 
+---
+
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ngi-indi/module-bias-gym/blob/main/LICENSE.md) file for details.
+
+---
 
 ## Contact
 For any questions or support, please reach out to:
