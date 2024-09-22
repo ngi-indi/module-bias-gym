@@ -8,7 +8,7 @@
   ![Status: Stable](https://img.shields.io/badge/status-stable-brightgreen.svg)
     
   <p>
-    <strong>Bias Gym</strong> is a testing and benchmarking suite designed to evaluate, detect, and explain biases present in Web content. It provides a structured and customizable framework to test various forms of biases, including but not limited to <strong>gender bias</strong>, <strong>racial bias</strong>, <strong>political bias</strong>, <strong>linguistic bias</strong>, and <strong>hate speech</strong>.
+    <strong>Bias Gym</strong> is a testing and benchmarking suite designed to train and evaluate machine-learning models on detecting biases present in textual content. It provides a structured and customizable framework to test various forms of biases, including but not limited to <strong>gender bias</strong>, <strong>racial bias</strong>, <strong>political bias</strong>, <strong>linguistic bias</strong>, and <strong>hate speech</strong>.
   </p>
 
 </div>
