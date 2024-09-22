@@ -80,7 +80,7 @@ Install the required Python packages by running:
 
 1. **Prepare your data**: Ensure datasets are placed in the correct directory or modify the script to point to your data.
 
-2. **Run the `train.py` script** to train a model on a specific task. You can specify the model and task you want to train on using the provided options:
+2. **Run the train script** to train a model on a specific task, where you can specify the model and task you want to train on using the provided options:
 
    ```bash
    # Example: Training a single model on a single task
