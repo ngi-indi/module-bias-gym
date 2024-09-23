@@ -136,8 +136,8 @@ If you want to evaluate an already trained model, use the `--eval` flag:
    git push origin feature-branch
    ```
 7. **Open a pull request** from your fork’s branch to the main branch of this repository.
-   - Describe the changes you’ve made in the PR description.
-   - Ensure that your PR references any relevant issues.
+   - Describe the changes you’ve made in the pull request description.
+   - Ensure that your pull request references any relevant issues.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/ngi-indi/module-bias-gym/blob/main/LICENSE.md) file for details.
