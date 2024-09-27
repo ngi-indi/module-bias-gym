@@ -140,7 +140,7 @@ If you want to evaluate an already trained model, use the `--eval` flag:
    - Ensure that your pull request references any relevant issues.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/ngi-indi/module-bias-gym/blob/main/LICENSE) file for details.
+This project is licensed under the GNU General Public License v3.0 License - see the [LICENSE](https://github.com/ngi-indi/module-bias-gym/blob/main/LICENSE) file for details.
 
 ## Contact
 For any questions or support, please reach out to:
